@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="header-include"></div>
+    <script>
+    // header.htmlを読み込んで挿入
+    fetch('header.html')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('header-include').innerHTML = data;
+      });
+    </script>
+    <div class="container">
+        <section>
+            <h2>サイトについて</h2>
+            <p>このサイトは、随時更新していきます。</p>
+        </section>
+        <section>
+            <h2>更新履歴</h2>
+            <label for="filterInput"> </label>
+            <input type="text" id="filterInput" placeholder="記事名で絞り込み">
+            <div class="table-scroll">
+                <table id="historyTable">
+                    <thead>
+                        <tr>
+                            <th>記事名</th>
+                            <th>
+                                更新日
+                                <button id="sortToggle" title="ソート">▼</button>
+                            </th>
+                            <th>更新内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="article1.html">記事1</a></td>
+                            <td data-date="2025-11-10">2025/11/10</td>
+                            <td>初版公開</td>
+                        </tr>
+                        <tr>
+                            <td><a href="article2.html">記事2</a></td>
+                            <td data-date="2025-11-09">2025/11/09</td>
+                            <td>内容追加・調整</td>
+                        </tr>
+                        <tr>
+                            <td><a href="article3.html">記事3</a></td>
+                            <td data-date="2025-11-08">2025/11/08</td>
+                            <td>レイアウト修正</td>
+                        </tr>
+                        <tr>
+                            <td><a href="article4.html">記事4</a></td>
+                            <td data-date="2025-11-07">2025/11/07</td>
+                            <td>リンク追加</td>
+                        </tr>
+                        <tr>
+                            <td><a href="article5.html">記事5</a></td>
+                            <td data-date="2025-11-06">2025/11/06</td>
+                            <td>誤字修正</td>
+                        </tr>
+                        <tr>
+                            <td><a href="article6.html">記事6</a></td>
+                            <td data-date="2025-11-05">2025/11/05</td>
+                            <td>画像追加</td>
+                        </tr>
+                        <!-- ここに行を追加しても5件を超えたらスクロールされます -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2025 サイト</p>
+    </footer>
+    <script>
+        // 記事名のみフィルター
+        const filterInput = document.getElementById('filterInput');
+        const table = document.getElementById('historyTable');
+        filterInput.addEventListener('keyup', function() {
+            const filter = filterInput.value.toLowerCase();
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            for (let i = 0; i < rows.length; i++) {
+                const titleCell = rows[i].getElementsByTagName('td')[0];
+                const titleText = titleCell.textContent.toLowerCase();
+                rows[i].style.display = titleText.includes(filter) ? '' : 'none';
+            }
+        });
+
+        // 昇順・降順ソートのみ
+    let sortAsc = false;
+        const sortButton = document.getElementById('sortToggle');
+        const tbody = table.getElementsByTagName('tbody')[0];
+
+        function sortTableByDate(asc = true) {
+            const rows = Array.from(tbody.getElementsByTagName('tr'));
+            rows.sort((a, b) => {
+                const dateA = a.getElementsByTagName('td')[1].getAttribute('data-date');
+                const dateB = b.getElementsByTagName('td')[1].getAttribute('data-date');
+                if (asc) {
+                    return dateA.localeCompare(dateB);
+                } else {
+                    return dateB.localeCompare(dateA);
+                }
+            });
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+    // 初期表示は最新順（降順）
+    sortTableByDate(false);
+
+        sortButton.addEventListener('click', function() {
+            sortAsc = !sortAsc;
+            sortTableByDate(sortAsc);
+            sortButton.textContent = sortAsc ? '▲' : '▼';
+        });
+    </script>
+</body>
+</html>

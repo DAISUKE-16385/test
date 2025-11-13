@@ -1,0 +1,185 @@
+/* テーブルスクロール用 */
+.table-scroll {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 12px;
+}
+.table-scroll table {
+    margin-top: 0;
+}
+/* ABCテーブル色分け */
+table[name="A"] th {
+    background-color: #ffe5e5;
+}
+table[name="B"] th {
+    background-color: #e5ecff;
+}
+table[name="C"] th {
+    background-color: #e5ffe5;
+}
+table[name="A"] td,
+table[name="B"] td,
+table[name="C"] td {
+    background-color: #fff;
+}
+body {
+    font-family: sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+header {
+    background-color: #444;
+    color: #fff;
+    padding: 20px 0 10px 0;
+    text-align: center;
+}
+nav {
+    margin-top: 10px;
+    background: #222;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+nav li {
+    margin: 0;
+}
+nav a {
+    display: block;
+    padding: 10px 30px;
+    color: #fff;
+    text-decoration: none;
+    border-right: 1px solid #444;
+}
+nav a:last-child {
+    border-right: none;
+}
+nav a:hover {
+    background: #555;
+}
+.container {
+    max-width: 900px;
+    margin: 40px auto 0 auto;
+    background: #fff;
+    padding: 30px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+h2 {
+    margin-top: 24px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+}
+th, td {
+    border: 1px solid #ccc;
+    padding: 9px;
+    text-align: center;
+    font-size: 1em;
+}
+th {
+    background: #eee;
+}
+.filter-area {
+    text-align: right;
+    margin-bottom: 7px;
+}
+.filter-input {
+    font-size: 1em;
+    padding: 4px 12px;
+    border-radius: 4px;
+    border: 1px solid #aaa;
+    margin-left: 10px;
+}
+.no-result-row {
+    text-align: center;
+    font-size: 1.1em;
+    color: #888;
+}
+footer {
+    margin-top: 60px;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px 10px;
+        padding: 20px 15px;
+    }
+    
+    h1, h2 {
+        font-size: 1.4em;
+    }
+    
+    h3 {
+        font-size: 1.2em;
+    }
+    
+    h4 {
+        font-size: 1.1em;
+    }
+    
+    table {
+        font-size: 0.9em;
+    }
+    
+    th, td {
+        padding: 6px 4px;
+        font-size: 0.85em;
+    }
+    
+    .table-scroll {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .filter-input {
+        width: 100%;
+        font-size: 16px;
+        padding: 8px 12px;
+        margin: 10px 0;
+        box-sizing: border-box;
+    }
+    
+    #sortToggle {
+        font-size: 0.8em;
+        padding: 4px 8px;
+        touch-action: manipulation;
+    }
+    
+    /* テーブル列幅をスマホ用に調整 */
+    .details th.col1, .details td.col1,
+    .border th.col1, .border td.col1,
+    table[name="A"] th.col1, table[name="A"] td.col1,
+    table[name="B"] th.col1, table[name="B"] td.col1,
+    table[name="C"] th.col1, table[name="C"] td.col1 {
+        width: 80px;
+        min-width: 60px;
+    }
+}
+/* details/borderテーブルの列幅個別指定 */
+.details th.col1, .details td.col1,
+.border th.col1, .border td.col1,
+table[name="A"] th.col1, table[name="A"] td.col1,
+table[name="B"] th.col1, table[name="B"] td.col1,
+table[name="C"] th.col1, table[name="C"] td.col1 {
+    width: 120px;
+    min-width: 100px;
+}
+.details th.col2, .details td.col2,
+.border th.col2, .border td.col2,
+table[name="A"] th.col2, table[name="A"] td.col2,
+table[name="B"] th.col2, table[name="B"] td.col2,
+table[name="C"] th.col2, table[name="C"] td.col2 {
+    width: auto;
+}
